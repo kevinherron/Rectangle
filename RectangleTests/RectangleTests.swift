@@ -544,6 +544,88 @@ class VerticalSixthActionTests: XCTestCase {
     }
 }
 
+class CenteredSizeActionTests: XCTestCase {
+
+    private let actions: [WindowAction] = [.centerTwoThirdsSize, .centerThreeFourthsSize, .centerSquare]
+
+    func testCenteredSizeActionsUseAvailableStableIdentifiers() {
+        XCTAssertEqual(WindowAction.lastVerticalSixth.rawValue, 146)
+        XCTAssertEqual(actions.map(\.rawValue), [147, 148, 149])
+        XCTAssertEqual(actions.map(\.name), ["centerTwoThirdsSize", "centerThreeFourthsSize", "centerSquare"])
+    }
+
+    func testFractionalSizesScaleBothDimensionsAroundTheCenter() {
+        let visibleFrame = CGRect(x: 0, y: 40, width: 1920, height: 1080)
+        XCTAssertEqual(calculate(.centerTwoThirdsSize, visibleFrame: visibleFrame).rect,
+                       CGRect(x: 320, y: 220, width: 1280, height: 720))
+        XCTAssertEqual(calculate(.centerThreeFourthsSize, visibleFrame: visibleFrame).rect,
+                       CGRect(x: 240, y: 175, width: 1440, height: 810))
+    }
+
+    func testFractionalSizesRoundToWholePointsOnOffsetScreens() {
+        let visibleFrame = CGRect(x: 20, y: 40, width: 1003, height: 800)
+        XCTAssertEqual(calculate(.centerTwoThirdsSize, visibleFrame: visibleFrame).rect,
+                       CGRect(x: 187, y: 174, width: 669, height: 533))
+        XCTAssertEqual(calculate(.centerThreeFourthsSize, visibleFrame: visibleFrame).rect,
+                       CGRect(x: 146, y: 140, width: 752, height: 600))
+    }
+
+    func testCenterSquareUsesTheShorterScreenDimension() {
+        XCTAssertEqual(calculate(.centerSquare, visibleFrame: CGRect(x: 0, y: 40, width: 1920, height: 1080)).rect,
+                       CGRect(x: 420, y: 40, width: 1080, height: 1080))
+        XCTAssertEqual(calculate(.centerSquare, visibleFrame: CGRect(x: 20, y: 40, width: 800, height: 1003)).rect,
+                       CGRect(x: 20, y: 142, width: 800, height: 800))
+    }
+
+    func testOnlyCenterSquareAppliesGaps() {
+        XCTAssertEqual(WindowAction.centerTwoThirdsSize.gapsApplicable, Dimension.none)
+        XCTAssertEqual(WindowAction.centerThreeFourthsSize.gapsApplicable, Dimension.none)
+        XCTAssertEqual(WindowAction.centerSquare.gapsApplicable, Dimension.both)
+    }
+
+    func testCenteredSizeActionsAreBindableInSettingsButHiddenFromMenuAndDragSnapping() throws {
+        XCTAssertTrue(actions.allSatisfy { WindowAction.active.contains($0) })
+        XCTAssertTrue(actions.allSatisfy(\.excludedFromMenu))
+        XCTAssertTrue(actions.allSatisfy { !$0.isDragSnappable })
+
+        let controller = ShortcutsViewController()
+        _ = controller.view
+        let outlineView = try XCTUnwrap(findOutlineView(in: controller.view))
+
+        var found: [WindowAction] = []
+        func collect(from item: Any?) {
+            let count = controller.outlineView(outlineView, numberOfChildrenOfItem: item)
+            for index in 0..<count {
+                let child = controller.outlineView(outlineView, child: index, ofItem: item)
+                if let shortcut = child as? ShortcutItem, actions.contains(shortcut.action) {
+                    found.append(shortcut.action)
+                }
+                collect(from: child)
+            }
+        }
+        collect(from: nil)
+
+        XCTAssertEqual(found, actions)
+    }
+
+    private func calculate(_ action: WindowAction, visibleFrame: CGRect) -> RectResult {
+        WindowCalculationFactory.calculationsByAction[action]!.calculateRect(
+            RectCalculationParameters(window: Window(id: 1, rect: CGRect(x: 0, y: 0, width: 300, height: 200)),
+                                      visibleFrameOfScreen: visibleFrame,
+                                      action: action,
+                                      lastAction: nil)
+        )
+    }
+
+    private func findOutlineView(in view: NSView) -> NSOutlineView? {
+        if let outlineView = view as? NSOutlineView { return outlineView }
+        for subview in view.subviews {
+            if let outlineView = findOutlineView(in: subview) { return outlineView }
+        }
+        return nil
+    }
+}
+
 class WindowActionMenuTests: XCTestCase {
 
     func testRowsAndColumnsShareOptionalSubmenu() throws {

@@ -319,6 +319,7 @@ class ShortcutsViewController: NSViewController {
         let extraCategories: [ShortcutCategory] = [
             ShortcutCategory(actions: [.tileRows, .tileColumns]),
             ShortcutCategory(actions: [.largerWidth, .smallerWidth]),
+            ShortcutCategory(actions: [.centerTwoThirdsSize, .centerThreeFourthsSize, .centerSquare]),
             ShortcutCategory(actions: [.topVerticalThird, .middleVerticalThird, .bottomVerticalThird, .topVerticalTwoThirds, .bottomVerticalTwoThirds]),
             ShortcutCategory(actions: [.topLeftEighth, .topCenterLeftEighth, .topCenterRightEighth, .topRightEighth, .bottomLeftEighth, .bottomCenterLeftEighth, .bottomCenterRightEighth, .bottomRightEighth]),
             ShortcutCategory(actions: [.firstVerticalSixth, .secondVerticalSixth, .thirdVerticalSixth, .fourthVerticalSixth, .fifthVerticalSixth, .lastVerticalSixth]),

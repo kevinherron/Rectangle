@@ -157,6 +157,8 @@
 		A73749B5FB00D2CC2DB08744 /* LowerMiddleCenterRightSixteenthCalculation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE08B666CCCD1805CAB08BD /* LowerMiddleCenterRightSixteenthCalculation.swift */; };
 		A8E100012F99000000000002 /* VerticalEighthCalculation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E100012F99000000000001 /* VerticalEighthCalculation.swift */; };
 		A8E100012F99000000000004 /* VerticalSixthCalculation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E100012F99000000000003 /* VerticalSixthCalculation.swift */; };
+		A8E100012F99000000000006 /* CenterFractionCalculation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E100012F99000000000005 /* CenterFractionCalculation.swift */; };
+		A8E100012F99000000000008 /* CenterSquareCalculation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E100012F99000000000007 /* CenterSquareCalculation.swift */; };
 		AA040C67290B2640003181D5 /* RunLoopThread.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA040C66290B2640003181D5 /* RunLoopThread.swift */; };
 		AA0AC000291C1B5E00D125D2 /* CGExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0ABFFF291C1B5E00D125D2 /* CGExtension.swift */; };
 		AA0AC002291C1B9100D125D2 /* AXExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0AC001291C1B9100D125D2 /* AXExtension.swift */; };
@@ -413,6 +415,8 @@
 		A4D034DBD7EFAC4CF5F8D67B /* TopCenterRightTwelfthCalculation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopCenterRightTwelfthCalculation.swift; sourceTree = "<group>"; };
 		A8E100012F99000000000001 /* VerticalEighthCalculation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalEighthCalculation.swift; sourceTree = "<group>"; };
 		A8E100012F99000000000003 /* VerticalSixthCalculation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalSixthCalculation.swift; sourceTree = "<group>"; };
+		A8E100012F99000000000005 /* CenterFractionCalculation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterFractionCalculation.swift; sourceTree = "<group>"; };
+		A8E100012F99000000000007 /* CenterSquareCalculation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterSquareCalculation.swift; sourceTree = "<group>"; };
 		AA040C66290B2640003181D5 /* RunLoopThread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunLoopThread.swift; sourceTree = "<group>"; };
 		AA0ABFFF291C1B5E00D125D2 /* CGExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGExtension.swift; sourceTree = "<group>"; };
 		AA0AC001291C1B9100D125D2 /* AXExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AXExtension.swift; sourceTree = "<group>"; };
@@ -555,6 +559,8 @@
 				FA34D0FE2F7E896E00EEBEF1 /* SpecificDisplayCalculation.swift */,
 				A8E100012F99000000000001 /* VerticalEighthCalculation.swift */,
 				A8E100012F99000000000003 /* VerticalSixthCalculation.swift */,
+				A8E100012F99000000000005 /* CenterFractionCalculation.swift */,
+				A8E100012F99000000000007 /* CenterSquareCalculation.swift */,
 				BB0B80442EFB0AF900A9B165 /* BottomVerticalThirdCalculation.swift */,
 				BB0B80452EFB0AF900A9B165 /* BottomVerticalTwoThirdsCalculation.swift */,
 				BB0B80462EFB0AF900A9B165 /* MiddleVerticalThirdCalculation.swift */,
@@ -1266,6 +1272,8 @@
 				FA34D0FF2F7E896E00EEBEF1 /* SpecificDisplayCalculation.swift in Sources */,
 				A8E100012F99000000000002 /* VerticalEighthCalculation.swift in Sources */,
 				A8E100012F99000000000004 /* VerticalSixthCalculation.swift in Sources */,
+				A8E100012F99000000000006 /* CenterFractionCalculation.swift in Sources */,
+				A8E100012F99000000000008 /* CenterSquareCalculation.swift in Sources */,
 				630644571003EB468CB643D8 /* BottomCenterRightSixteenthCalculation.swift in Sources */,
 				2D240EE416CC03AC921E3A4F /* BottomRightSixteenthCalculation.swift in Sources */,
 				98ED703C305DB20A0077BD10 /* BehaviorSettingsViewModel.swift in Sources */,

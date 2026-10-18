@@ -154,9 +154,7 @@ enum WindowAction: Int, Codable {
          fourthVerticalSixth = 144,
          fifthVerticalSixth = 145,
          lastVerticalSixth = 146,
-         centerTwoThirdsSize = 147,
-         centerThreeFourthsSize = 148,
-         centerSquare = 149
+         centerSquare = 147
 
     // Order matters here - it's used in the menu
     static let active = [leftHalf, rightHalf, centerHalf, topHalf, bottomHalf,
@@ -165,7 +163,7 @@ enum WindowAction: Int, Codable {
                          topVerticalThird, middleVerticalThird, bottomVerticalThird, topVerticalTwoThirds, bottomVerticalTwoThirds,
                          maximize, almostMaximize, maximizeHeight, larger, smaller, largerWidth, smallerWidth, largerHeight, smallerHeight,
                          center, centerProminently, restore,
-                         centerTwoThirdsSize, centerThreeFourthsSize, centerSquare,
+                         centerSquare,
                          nextDisplay, previousDisplay,
                          moveLeft, moveRight, moveUp, moveDown,
                          firstFourth, secondFourth, thirdFourth, lastFourth, firstThreeFourths, centerThreeFourths, lastThreeFourths,
@@ -236,7 +234,7 @@ enum WindowAction: Int, Codable {
              .fifthVerticalEighth, .sixthVerticalEighth, .seventhVerticalEighth, .lastVerticalEighth,
              .firstVerticalSixth, .secondVerticalSixth, .thirdVerticalSixth,
              .fourthVerticalSixth, .fifthVerticalSixth, .lastVerticalSixth,
-             .centerTwoThirdsSize, .centerThreeFourthsSize, .centerSquare,
+             .centerSquare,
              .cycleStackedWindows, .cycleStackedWindowsBackward: return true
         default: return false
         }
@@ -322,8 +320,6 @@ enum WindowAction: Int, Codable {
         case .fourthVerticalSixth: return "fourthVerticalSixth"
         case .fifthVerticalSixth: return "fifthVerticalSixth"
         case .lastVerticalSixth: return "lastVerticalSixth"
-        case .centerTwoThirdsSize: return "centerTwoThirdsSize"
-        case .centerThreeFourthsSize: return "centerThreeFourthsSize"
         case .centerSquare: return "centerSquare"
         case .doubleHeightUp: return "doubleHeightUp"
         case .doubleHeightDown: return "doubleHeightDown"
@@ -565,10 +561,6 @@ enum WindowAction: Int, Codable {
             String(localized: "Fifth Vertical Sixth")
         case .lastVerticalSixth:
             String(localized: "Last Vertical Sixth")
-        case .centerTwoThirdsSize:
-            String(localized: "Center Two Thirds Size")
-        case .centerThreeFourthsSize:
-            String(localized: "Center Three Fourths Size")
         case .centerSquare:
             String(localized: "Center Square")
         case .tileRows:
@@ -705,7 +697,7 @@ enum WindowAction: Int, Codable {
             .fifthVerticalEighth, .sixthVerticalEighth, .seventhVerticalEighth, .lastVerticalEighth,
             .firstVerticalSixth, .secondVerticalSixth, .thirdVerticalSixth,
             .fourthVerticalSixth, .fifthVerticalSixth, .lastVerticalSixth,
-            .centerTwoThirdsSize, .centerThreeFourthsSize, .centerSquare,
+            .centerSquare,
             // Ninths
             .topLeftNinth, .topCenterNinth, .topRightNinth, .middleLeftNinth, .middleCenterNinth, .middleRightNinth, .bottomLeftNinth, .bottomCenterNinth, .bottomRightNinth,
             // Corner thirds
@@ -848,8 +840,6 @@ enum WindowAction: Int, Codable {
         case .fourthVerticalSixth: return NSImage(imageLiteralResourceName: "fourthVerticalSixthTemplate")
         case .fifthVerticalSixth: return NSImage(imageLiteralResourceName: "fifthVerticalSixthTemplate")
         case .lastVerticalSixth: return NSImage(imageLiteralResourceName: "lastVerticalSixthTemplate")
-        case .centerTwoThirdsSize: return NSImage(imageLiteralResourceName: "centerTwoThirdsSizeTemplate")
-        case .centerThreeFourthsSize: return NSImage(imageLiteralResourceName: "centerThreeFourthsSizeTemplate")
         case .centerSquare: return NSImage(imageLiteralResourceName: "centerSquareTemplate")
         case .doubleHeightUp: return  NSImage()
         case .doubleHeightDown: return  NSImage()
@@ -973,7 +963,6 @@ enum WindowAction: Int, Codable {
         case .maximizeHeight:
             return Defaults.applyGapsToMaximizeHeight.userDisabled ? .none : .vertical;
         case .almostMaximize, .previousDisplay, .nextDisplay, .larger, .smaller, .largerWidth, .smallerWidth, .largerHeight, .smallerHeight, .center, .centerProminently, .restore, .specified, .reverseAll, .tileAll, .tileRows, .tileColumns, .cascadeAll, .cascadeActiveApp, .tileActiveApp,
-             .centerTwoThirdsSize, .centerThreeFourthsSize,
              .cycleStackedWindows, .cycleStackedWindowsBackward,
              .displayOne, .displayTwo, .displayThree, .displayFour, .displayFive,
              .displaySix, .displaySeven, .displayEight, .displayNine:

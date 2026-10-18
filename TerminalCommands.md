@@ -15,7 +15,7 @@ The preferences window is purposefully slim, but there's a lot that can be modif
 - [Almost Maximize](#almost-maximize)
 - [Repeated Maximize restores the previous size and position](#repeated-maximize-restores-the-previous-size-and-position)
 - [Add an extra centering command with custom size](#add-an-extra-centering-command-with-custom-size)
-- [Add extra centered sizing commands](#add-extra-centered-sizing-commands)
+- [Add a center square command](#add-a-center-square-command)
 - [Add extra "ninths" sizing commands](#add-extra-ninths-sizing-commands)
 - [Add extra "eighths" sizing commands](#add-extra-eighths-sizing-commands)
 - [Add extra "full-height eighths" sizing commands](#add-extra-full-height-eighths-sizing-commands)
@@ -198,23 +198,19 @@ For example, the command for setting the shortcut to `ctrl option command C` wou
 defaults write com.knollsoft.Rectangle centerProminently -dict-add keyCode -float 8 modifierFlags -float 1835305
 ```
 
-## Add extra centered sizing commands
+## Add a center square command
 
-These commands center the window and resize it in both dimensions. The existing "Center Two Thirds" and "Center Three Fourths" commands only resize one dimension. These can be configured under the "Extra" section of the Shortcuts settings, or via CLI.
+This command centers the window as the largest square that fits on the screen. That's full height on a landscape display and full width on a portrait one. It can be configured under the "Extra" section of the Shortcuts settings, or via CLI. Like "Center Two Thirds" and "Center Three Fourths", it applies the configured gap size.
 
-The key codes are:
+The key code is:
 
-* centerTwoThirdsSize: two thirds of the screen's width and height
-* centerThreeFourthsSize: three fourths of the screen's width and height
-* centerSquare: the largest square that fits on the screen
+* centerSquare
 
-For example, the command for setting the center square shortcut to `ctrl opt shift S` would be:
+For example, the command for setting the shortcut to `ctrl opt shift S` would be:
 
 ```bash
 defaults write com.knollsoft.Rectangle centerSquare -dict-add keyCode -float 1 modifierFlags -float 917504
 ```
-
-Center Square applies the configured gap size, since it spans the full height (or width on a portrait display). The other two leave gaps out, like Almost Maximize.
 
 
 ## Add extra "ninths" sizing commands

@@ -6185,16 +6185,6 @@
         }
       }
     },
-    "Center Three Fourths Size" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Center Three Fourths Size"
-          }
-        }
-      }
-    },
     "Center Two Thirds" : {
       "localizations" : {
         "ar" : {
@@ -6363,16 +6353,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "中間２／３"
-          }
-        }
-      }
-    },
-    "Center Two Thirds Size" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Center Two Thirds Size"
           }
         }
       }

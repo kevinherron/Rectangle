@@ -544,49 +544,34 @@ class VerticalSixthActionTests: XCTestCase {
     }
 }
 
-class CenteredSizeActionTests: XCTestCase {
+class CenterSquareActionTests: XCTestCase {
 
-    private let actions: [WindowAction] = [.centerTwoThirdsSize, .centerThreeFourthsSize, .centerSquare]
-
-    func testCenteredSizeActionsUseAvailableStableIdentifiers() {
+    func testCenterSquareUsesAvailableStableIdentifier() {
         XCTAssertEqual(WindowAction.lastVerticalSixth.rawValue, 146)
-        XCTAssertEqual(actions.map(\.rawValue), [147, 148, 149])
-        XCTAssertEqual(actions.map(\.name), ["centerTwoThirdsSize", "centerThreeFourthsSize", "centerSquare"])
+        XCTAssertEqual(WindowAction.centerSquare.rawValue, 147)
+        XCTAssertEqual(WindowAction.centerSquare.name, "centerSquare")
     }
 
-    func testFractionalSizesScaleBothDimensionsAroundTheCenter() {
-        let visibleFrame = CGRect(x: 0, y: 40, width: 1920, height: 1080)
-        XCTAssertEqual(calculate(.centerTwoThirdsSize, visibleFrame: visibleFrame).rect,
-                       CGRect(x: 320, y: 220, width: 1280, height: 720))
-        XCTAssertEqual(calculate(.centerThreeFourthsSize, visibleFrame: visibleFrame).rect,
-                       CGRect(x: 240, y: 175, width: 1440, height: 810))
-    }
-
-    func testFractionalSizesRoundToWholePointsOnOffsetScreens() {
-        let visibleFrame = CGRect(x: 20, y: 40, width: 1003, height: 800)
-        XCTAssertEqual(calculate(.centerTwoThirdsSize, visibleFrame: visibleFrame).rect,
-                       CGRect(x: 187, y: 174, width: 669, height: 533))
-        XCTAssertEqual(calculate(.centerThreeFourthsSize, visibleFrame: visibleFrame).rect,
-                       CGRect(x: 146, y: 140, width: 752, height: 600))
-    }
-
-    func testCenterSquareUsesTheShorterScreenDimension() {
-        XCTAssertEqual(calculate(.centerSquare, visibleFrame: CGRect(x: 0, y: 40, width: 1920, height: 1080)).rect,
+    func testCenterSquareIsFullHeightOnLandscapeDisplays() {
+        XCTAssertEqual(calculate(visibleFrame: CGRect(x: 0, y: 40, width: 1920, height: 1080)),
                        CGRect(x: 420, y: 40, width: 1080, height: 1080))
-        XCTAssertEqual(calculate(.centerSquare, visibleFrame: CGRect(x: 20, y: 40, width: 800, height: 1003)).rect,
+        XCTAssertEqual(calculate(visibleFrame: CGRect(x: -2560, y: -300, width: 2560, height: 1415)),
+                       CGRect(x: -1987, y: -300, width: 1415, height: 1415))
+    }
+
+    func testCenterSquareIsFullWidthOnPortraitDisplays() {
+        XCTAssertEqual(calculate(visibleFrame: CGRect(x: 20, y: 40, width: 800, height: 1003)),
                        CGRect(x: 20, y: 142, width: 800, height: 800))
     }
 
-    func testOnlyCenterSquareAppliesGaps() {
-        XCTAssertEqual(WindowAction.centerTwoThirdsSize.gapsApplicable, Dimension.none)
-        XCTAssertEqual(WindowAction.centerThreeFourthsSize.gapsApplicable, Dimension.none)
+    func testCenterSquareAppliesGaps() {
         XCTAssertEqual(WindowAction.centerSquare.gapsApplicable, Dimension.both)
     }
 
-    func testCenteredSizeActionsAreBindableInSettingsButHiddenFromMenuAndDragSnapping() throws {
-        XCTAssertTrue(actions.allSatisfy { WindowAction.active.contains($0) })
-        XCTAssertTrue(actions.allSatisfy(\.excludedFromMenu))
-        XCTAssertTrue(actions.allSatisfy { !$0.isDragSnappable })
+    func testCenterSquareIsBindableInSettingsButHiddenFromMenuAndDragSnapping() throws {
+        XCTAssertTrue(WindowAction.active.contains(.centerSquare))
+        XCTAssertTrue(WindowAction.centerSquare.excludedFromMenu)
+        XCTAssertFalse(WindowAction.centerSquare.isDragSnappable)
 
         let controller = ShortcutsViewController()
         _ = controller.view
@@ -597,7 +582,7 @@ class CenteredSizeActionTests: XCTestCase {
             let count = controller.outlineView(outlineView, numberOfChildrenOfItem: item)
             for index in 0..<count {
                 let child = controller.outlineView(outlineView, child: index, ofItem: item)
-                if let shortcut = child as? ShortcutItem, actions.contains(shortcut.action) {
+                if let shortcut = child as? ShortcutItem, shortcut.action == .centerSquare {
                     found.append(shortcut.action)
                 }
                 collect(from: child)
@@ -605,16 +590,16 @@ class CenteredSizeActionTests: XCTestCase {
         }
         collect(from: nil)
 
-        XCTAssertEqual(found, actions)
+        XCTAssertEqual(found, [.centerSquare])
     }
 
-    private func calculate(_ action: WindowAction, visibleFrame: CGRect) -> RectResult {
-        WindowCalculationFactory.calculationsByAction[action]!.calculateRect(
+    private func calculate(visibleFrame: CGRect) -> CGRect {
+        WindowCalculationFactory.calculationsByAction[.centerSquare]!.calculateRect(
             RectCalculationParameters(window: Window(id: 1, rect: CGRect(x: 0, y: 0, width: 300, height: 200)),
                                       visibleFrameOfScreen: visibleFrame,
-                                      action: action,
+                                      action: .centerSquare,
                                       lastAction: nil)
-        )
+        ).rect
     }
 
     private func findOutlineView(in view: NSView) -> NSOutlineView? {
